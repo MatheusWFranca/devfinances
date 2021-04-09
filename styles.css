@@ -211,6 +211,10 @@ td.expense {
   color: #e92929;
 }
 
+.expense-img {
+  cursor: pointer;
+}
+
 /* Modal <---> */
 
 .modal-overlay {
@@ -257,7 +261,7 @@ input {
   margin-top: .8rem;
 }
 
-.input-group small {
+.input-group .help {
   opacity: .4;
 }
 

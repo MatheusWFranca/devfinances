@@ -7,24 +7,18 @@ const Modal = {
   },
 };
 
+const Storage = {
+  get() {
+    return JSON.parse(localStorage.getItem("dev.finances:transactions")) || [];
+  },
+  set(transactions) {
+    localStorage.setItem("dev.finances:transactions", JSON.stringify(transactions));
+  }
+};
+
 const Transaction = {
-  all: [
-    {
-      description: 'Luz',
-      amount: -50000,
-      date: '23/01/2021',
-    },
-    {
-      description: 'Website',
-      amount: 500000,
-      date: '23/01/2021',
-    },
-    {
-      description: 'Internet',
-      amount: -20000,
-      date: '23/01/2021',
-    },
-  ],
+  all: Storage.get(),
+
   add(transaction) {
     Transaction.all.push(transaction);
 
@@ -73,14 +67,14 @@ const Transaction = {
 const DOM = {
   transactionsContainer: document.querySelector('#data-table tbody'),
 
-  addTransaction(transaction) {
+  addTransaction(transaction, index) {
     const tr = document.createElement('tr');
-    tr.innerHTML = DOM.innerHTMLTransaction(transaction);
-
+    tr.innerHTML = DOM.innerHTMLTransaction(transaction, index);
+    tr.dataset.index = index;
     DOM.transactionsContainer.appendChild(tr);
   },
 
-  innerHTMLTransaction(transaction) {
+  innerHTMLTransaction(transaction, index) {
     const CSSclass = transaction.amount > 0 ? 'income' : 'expense';
 
     const amount = Utils.formatCurrency(transaction.amount);
@@ -90,7 +84,7 @@ const DOM = {
       <td class="${CSSclass}">${amount}</td>
       <td class="date">${transaction.date}</td>
       <td>
-        <img src="./assets/minus.svg" alt="Remover Transação">
+        <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover Transação">
       </td>
   `;
 
@@ -166,6 +160,10 @@ const Form = {
       }
   },
 
+  saveTransaction(transaction) {
+    Transaction.add(transaction)
+  },
+
   formatValues() {
     let { description, amount, date } = Form.getValues();
 
@@ -173,7 +171,17 @@ const Form = {
 
     date = Utils.formatDate(date);
 
-    console.log(date)
+    return {
+      description,
+      amount,
+      date
+    }
+  },
+
+  clearFiels() {
+    Form.description.value = "";
+    Form.amount.value = "";
+    Form.date.value = "";
   },
 
   submit(event) {
@@ -181,22 +189,27 @@ const Form = {
 
     try {
       Form.validadeFields();
-      Form.formatValues();
+      const transaction = Form.formatValues();
+      // Formatar
+      Transaction.add(transaction);
+      // Salvar & add os dados do formulario
+      Form.clearFiels()
+      // apagar os dados
+      Modal.close();
+      // Fechar modal
     } catch (error) {
-      alert(error.message)
+      alert(error.message);
     }
   }
 };
 
 const App = {
   init() {
-
-    Transaction.all.forEach(transaction => {
-      DOM.addTransaction(transaction);
-    });
-
+    Transaction.all.forEach(DOM.addTransaction)
+    
     DOM.updateBalance();
 
+    Storage.set(Transaction.all);
   },
   reload() {
     DOM.clearTransactions();
