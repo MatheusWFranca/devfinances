@@ -1,9 +1,9 @@
 <h1 align="center">
-  <img alt="dev.finances" title="dev.finances" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fgithub.com%2Flogos&psig=AOvVaw3maIwK638CpbUbg71JIYbi&ust=1618322113898000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNCV9-bt-O8CFQAAAAAdAAAAABAJ" width="220px" />
+  <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fgithub.com%2Flogos&psig=AOvVaw3maIwK638CpbUbg71JIYbi&ust=1618322113898000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNCV9-bt-O8CFQAAAAAdAAAAABAJ"  />
 </h1>
 
 <p align="center">
- <img src="https://img.shields.io/static/v1?label=DEV.&message=fiances&color=49AA26&labelColor=000000" alt="#" />
+ <img src="https://img.shields.io/static/v1?label=DEV.&message=finances&color=49AA26&labelColor=000000" alt="#" />
 </p>
 
 <br>
