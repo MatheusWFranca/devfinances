@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center"> Aplicação Desktop
-  <img alt="dev.finances" src="https://user-images.githubusercontent.com/61566949/114405578-33f76280-9b7d-11eb-889a-d64d346f8b3e.png" width="100%">
+  <img alt="dev.finances" src="https://imgur.com/a/jzqU4iz" width="200px" /> 
 </p>
 
 <p align="center"> Aplicação Mobile
